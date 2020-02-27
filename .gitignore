@@ -1,0 +1,12 @@
+/.externals
+/tmp
+/target
+/target_*
+/procxx
+/cmake_build*
+o/*
+*.sw?
+*.log
+/__*.vim
+/__*.?pp
+
