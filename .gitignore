@@ -3,6 +3,7 @@
 /target
 /target_*
 /procxx
+/doctest
 /cmake_build*
 o/*
 *.sw?
