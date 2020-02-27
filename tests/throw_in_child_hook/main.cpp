@@ -13,13 +13,15 @@ TEST_CASE("Exception in child-hook")
 {
 	procxx::process child{child_name};
 
-	REQUIRE_NOTHROW(
+	REQUIRE_THROWS_WITH(
 		child.exec([](procxx::process::hook_place where) {
 				if(procxx::process::hook_place::child == where)
 				{
 					throw std::runtime_error("Some unexpected error!");
 				}
 			})
+		,
+		"exception in child: Some unexpected error!"
 	);
 
 	REQUIRE(!child.waited());
