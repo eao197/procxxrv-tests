@@ -20,6 +20,6 @@ MxxRu::Cpp::composite_target( MxxRu::BUILD_ROOT ) {
 	end
 
 	required_prj 'apps/sum_first_10/prj.rb'
-	required_prj 'tests/broken_input/prj.rb'
+	required_prj 'tests/build_tests.rb'
 }
 

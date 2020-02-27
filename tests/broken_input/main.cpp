@@ -2,39 +2,44 @@
 
 #include "tests/utils.hpp"
 
+#define DOCTEST_CONFIG_IMPLEMENT
+#include <doctest/doctest.h>
+
 #include <iostream>
 
-int main(int /*argc*/, char ** argv)
+std::string child_name;
+
+TEST_CASE("Broken input")
 {
-	(void)signal(SIGPIPE, SIG_IGN);
+	procxx::process child{child_name};
 
-	const std::string child_name = extract_pathname(argv[0]) + "/sum_first_10";
+	REQUIRE_NOTHROW(child.exec());
+	REQUIRE(child.running());
 
-	for(int i = 0; i != 100; ++i)
-	{
-		try
-		{
-			procxx::process child{child_name};
-			child.exec();
-
-			std::cout << i << ": started" << std::endl;
-
+	REQUIRE_NOTHROW([&]{
 			for(int j = 0; j != 20000; ++j)
 			{
 				child << std::to_string(j) + "\n";
 			}
 			child.input() << std::flush;
+		}()
+	);
 
-			std::string result;
+	std::string result;
+	REQUIRE_NOTHROW([&]{
 			child >> result;
-			std::cout << i << ": result: '" << result << "'" << std::endl;
-		}
-		catch(const std::exception & x)
-		{
-			std::cerr << "on iteration #" << i << ": " << x.what() << std::endl;
-		}
-	}
+		}()
+	);
 
-	return 0;
+	REQUIRE_EQ("45", result);
+}
+
+int main(int argc, char ** argv)
+{
+	(void)signal(SIGPIPE, SIG_IGN);
+
+	child_name = extract_pathname(argv[0]) + "/sum_first_10";
+
+	return doctest::Context{argc, argv}.run();
 }
 
