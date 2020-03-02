@@ -17,9 +17,7 @@ TEST_CASE("running method")
 	REQUIRE_NOTHROW(child.exec());
 	std::this_thread::sleep_for(std::chrono::milliseconds(750));
 	REQUIRE(!child.running());
-	REQUIRE(!child.waited());
-
-	REQUIRE_NOTHROW(child.wait());
+	REQUIRE(child.waited());
 }
 
 int main(int argc, char ** argv)
