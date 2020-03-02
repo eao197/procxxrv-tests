@@ -19,6 +19,7 @@ MxxRu::Cpp::composite_target( MxxRu::BUILD_ROOT ) {
 			'target', MxxRu::Cpp::PrjAwareRuntimeSubdirObjPlacement::USE_COMPILER_ID )
 	end
 
+	required_prj 'apps/just_exit/prj.rb'
 	required_prj 'apps/sum_first_10/prj.rb'
 	required_prj 'tests/build_tests.rb'
 }
