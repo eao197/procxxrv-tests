@@ -1,4 +1,4 @@
-#include <procxx/process.h>
+#include <procyy/process.h>
 
 #include "tests/utils.hpp"
 
@@ -12,12 +12,12 @@ std::string child_name;
 TEST_CASE("Wrong name")
 {
 	bool error_detected = false;
-	procxx::process child{child_name};
+	procyy::process child{child_name};
 	try
 	{
 		child.exec();
 	}
-	catch(const procxx::process::exception & x)
+	catch(const procyy::process::exception & x)
 	{
 		error_detected = nullptr != std::strstr(x.what(), "execvp failure: ");
 	}

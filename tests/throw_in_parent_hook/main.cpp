@@ -1,4 +1,4 @@
-#include <procxx/process.h>
+#include <procyy/process.h>
 
 #include "tests/utils.hpp"
 
@@ -11,11 +11,11 @@ std::string child_name;
 
 TEST_CASE("Exception in parent hook")
 {
-	procxx::process child{child_name};
+	procyy::process child{child_name};
 
 	REQUIRE_NOTHROW(
-		child.exec([](procxx::process::hook_place where) {
-				if(procxx::process::hook_place::parent == where)
+		child.exec([](procyy::process::hook_place where) {
+				if(procyy::process::hook_place::parent == where)
 				{
 					throw std::runtime_error("Some unexpected error!");
 				}
@@ -24,7 +24,7 @@ TEST_CASE("Exception in parent hook")
 
 	REQUIRE(!child.waited());
 
-	REQUIRE_NOTHROW(child.close(procxx::pipe_t::read_end()));
+	REQUIRE_NOTHROW(child.close(procyy::pipe_t::read_end()));
 
 	REQUIRE_NOTHROW(child.wait());
 

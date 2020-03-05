@@ -2,7 +2,7 @@
 /tmp
 /target
 /target_*
-/procxx
+/procyy
 /doctest
 /cmake_build*
 o/*

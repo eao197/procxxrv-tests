@@ -1,4 +1,4 @@
-#include <procxx/process.h>
+#include <procyy/process.h>
 
 #include "tests/utils.hpp"
 
@@ -11,7 +11,7 @@ std::string child_name;
 
 TEST_CASE("Broken input")
 {
-	procxx::process child{child_name};
+	procyy::process child{child_name};
 
 	REQUIRE_NOTHROW(child.exec());
 	REQUIRE(child.running());

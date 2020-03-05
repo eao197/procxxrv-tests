@@ -1,4 +1,4 @@
-#include <procxx/process.h>
+#include <procyy/process.h>
 
 #include "tests/utils.hpp"
 
@@ -12,7 +12,7 @@ std::string child_name;
 
 TEST_CASE("running method")
 {
-	procxx::process child{child_name};
+	procyy::process child{child_name};
 
 	REQUIRE_NOTHROW(child.exec());
 	std::this_thread::sleep_for(std::chrono::milliseconds(750));

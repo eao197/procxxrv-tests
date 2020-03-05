@@ -1,4 +1,4 @@
-#include <procxx/process.h>
+#include <procyy/process.h>
 
 #include "tests/utils.hpp"
 
@@ -11,11 +11,11 @@ std::string child_name;
 
 TEST_CASE("Exception in child-hook")
 {
-	procxx::process child{child_name};
+	procyy::process child{child_name};
 
 	REQUIRE_THROWS_WITH(
-		child.exec([](procxx::process::hook_place where) {
-				if(procxx::process::hook_place::child == where)
+		child.exec([](procyy::process::hook_place where) {
+				if(procyy::process::hook_place::child == where)
 				{
 					throw std::runtime_error("Some unexpected error!");
 				}
@@ -33,11 +33,11 @@ TEST_CASE("Exception in child-hook")
 
 TEST_CASE("Exception in child-hook (long description)")
 {
-	procxx::process child{child_name};
+	procyy::process child{child_name};
 
 	REQUIRE_THROWS_WITH(
-		child.exec([](procxx::process::hook_place where) {
-				if(procxx::process::hook_place::child == where)
+		child.exec([](procyy::process::hook_place where) {
+				if(procyy::process::hook_place::child == where)
 				{
 					throw std::runtime_error(
 							"_123456789_123456789_123456789_123456789"
@@ -64,11 +64,11 @@ TEST_CASE("Exception in child-hook (long description)")
 
 TEST_CASE("Non-standard exception in child-hook")
 {
-	procxx::process child{child_name};
+	procyy::process child{child_name};
 
 	REQUIRE_THROWS_WITH(
-		child.exec([](procxx::process::hook_place where) {
-				if(procxx::process::hook_place::child == where)
+		child.exec([](procyy::process::hook_place where) {
+				if(procyy::process::hook_place::child == where)
 				{
 					throw 42;
 				}
